@@ -8,6 +8,8 @@
 
 #import "ViewController.h"
 
+@import RSTWebViewController;
+
 @interface ViewController ()
 
 @end
@@ -19,14 +21,24 @@
     [super viewDidLoad];
 }
 
-- (void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
-}
-
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
+}
+
+- (IBAction)presentWebViewController:(UIButton *)sender
+{
+    RSTWebViewController *webViewController = [[RSTWebViewController alloc] initWithAddress:@"http://rileytestut.com"];
+    webViewController.showsDoneButton = YES;
+    
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:webViewController];
+    [self presentViewController:navigationController animated:YES completion:nil];
+}
+
+- (IBAction)pushWebViewController:(UIButton *)sender
+{
+    RSTWebViewController *webViewController = [[RSTWebViewController alloc] initWithAddress:@"http://rileytestut.com"];
+    [self.navigationController pushViewController:webViewController animated:YES];
 }
 
 @end
