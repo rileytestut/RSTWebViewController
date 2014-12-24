@@ -37,7 +37,7 @@
 
 - (IBAction)pushWebViewController:(UIButton *)sender
 {
-    RSTWebViewController *webViewController = [[RSTWebViewController alloc] initWithAddress:@"http://rileytestut.com"];
+    RSTWebViewController *webViewController = [[RSTWebViewController alloc] initWithAddress:@"http://nytimes.com"];
     [self.navigationController pushViewController:webViewController animated:YES];
 }
 

@@ -11,6 +11,8 @@
 		BF7E5EFB1A4A13E800106AAB /* RSTWebViewController.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF7E5EEF1A4A13E800106AAB /* RSTWebViewController.framework */; };
 		BF7E5F021A4A13E800106AAB /* RSTWebViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF7E5F011A4A13E800106AAB /* RSTWebViewControllerTests.swift */; };
 		BF7E5F0C1A4A148E00106AAB /* RSTWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF7E5F0B1A4A148E00106AAB /* RSTWebViewController.swift */; };
+		BF92C43E1A4A8A2900C50472 /* UIApplication+NetworkActivityIndicator.h in Headers */ = {isa = PBXBuildFile; fileRef = BF92C43C1A4A8A2900C50472 /* UIApplication+NetworkActivityIndicator.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		BF92C43F1A4A8A2900C50472 /* UIApplication+NetworkActivityIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = BF92C43D1A4A8A2900C50472 /* UIApplication+NetworkActivityIndicator.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -31,6 +33,8 @@
 		BF7E5F001A4A13E800106AAB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BF7E5F011A4A13E800106AAB /* RSTWebViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RSTWebViewControllerTests.swift; sourceTree = "<group>"; };
 		BF7E5F0B1A4A148E00106AAB /* RSTWebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RSTWebViewController.swift; sourceTree = "<group>"; };
+		BF92C43C1A4A8A2900C50472 /* UIApplication+NetworkActivityIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIApplication+NetworkActivityIndicator.h"; sourceTree = "<group>"; };
+		BF92C43D1A4A8A2900C50472 /* UIApplication+NetworkActivityIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIApplication+NetworkActivityIndicator.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,6 +79,7 @@
 			children = (
 				BF7E5EF41A4A13E800106AAB /* RSTWebViewController.h */,
 				BF7E5F0B1A4A148E00106AAB /* RSTWebViewController.swift */,
+				BF92C4371A4A887E00C50472 /* Categories */,
 				BF7E5EF21A4A13E800106AAB /* Supporting Files */,
 			);
 			path = RSTWebViewController;
@@ -105,6 +110,15 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		BF92C4371A4A887E00C50472 /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				BF92C43C1A4A8A2900C50472 /* UIApplication+NetworkActivityIndicator.h */,
+				BF92C43D1A4A8A2900C50472 /* UIApplication+NetworkActivityIndicator.m */,
+			);
+			name = Categories;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -113,6 +127,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BF7E5EF51A4A13E800106AAB /* RSTWebViewController.h in Headers */,
+				BF92C43E1A4A8A2900C50472 /* UIApplication+NetworkActivityIndicator.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -212,6 +227,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BF92C43F1A4A8A2900C50472 /* UIApplication+NetworkActivityIndicator.m in Sources */,
 				BF7E5F0C1A4A148E00106AAB /* RSTWebViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
