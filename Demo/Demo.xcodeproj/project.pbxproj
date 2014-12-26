@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		BF7E5F1C1A4A15DB00106AAB /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = BF7E5F1B1A4A15DB00106AAB /* main.m */; };
 		BF7E5F1F1A4A15DB00106AAB /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BF7E5F1E1A4A15DB00106AAB /* AppDelegate.m */; };
 		BF7E5F221A4A15DB00106AAB /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF7E5F211A4A15DB00106AAB /* ViewController.m */; };
 		BF7E5F251A4A15DB00106AAB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BF7E5F231A4A15DB00106AAB /* Main.storyboard */; };
@@ -16,6 +15,7 @@
 		BF7E5F361A4A15DB00106AAB /* DemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = BF7E5F351A4A15DB00106AAB /* DemoTests.m */; };
 		BF7E5F431A4A18A600106AAB /* RSTWebViewController.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF7E5F421A4A18A600106AAB /* RSTWebViewController.framework */; };
 		BF7E5F441A4A18A600106AAB /* RSTWebViewController.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BF7E5F421A4A18A600106AAB /* RSTWebViewController.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		BF8D33C51A4B5126004CE026 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = BF7E5F1B1A4A15DB00106AAB /* main.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -256,8 +256,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				BF7E5F221A4A15DB00106AAB /* ViewController.m in Sources */,
+				BF8D33C51A4B5126004CE026 /* main.m in Sources */,
 				BF7E5F1F1A4A15DB00106AAB /* AppDelegate.m in Sources */,
-				BF7E5F1C1A4A15DB00106AAB /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
