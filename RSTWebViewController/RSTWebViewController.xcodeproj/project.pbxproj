@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BF3403991A4D569300FCABE3 /* RSTURLActivityItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF3403981A4D569300FCABE3 /* RSTURLActivityItem.swift */; };
 		BF7E5EF51A4A13E800106AAB /* RSTWebViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = BF7E5EF41A4A13E800106AAB /* RSTWebViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		BF7E5EFB1A4A13E800106AAB /* RSTWebViewController.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF7E5EEF1A4A13E800106AAB /* RSTWebViewController.framework */; };
 		BF7E5F021A4A13E800106AAB /* RSTWebViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF7E5F011A4A13E800106AAB /* RSTWebViewControllerTests.swift */; };
@@ -27,6 +28,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		BF3403981A4D569300FCABE3 /* RSTURLActivityItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RSTURLActivityItem.swift; sourceTree = "<group>"; };
 		BF7E5EEF1A4A13E800106AAB /* RSTWebViewController.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = RSTWebViewController.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BF7E5EF31A4A13E800106AAB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BF7E5EF41A4A13E800106AAB /* RSTWebViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSTWebViewController.h; sourceTree = "<group>"; };
@@ -58,6 +60,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		BF34039A1A4D5C5D00FCABE3 /* Sharing */ = {
+			isa = PBXGroup;
+			children = (
+				BF3403981A4D569300FCABE3 /* RSTURLActivityItem.swift */,
+			);
+			name = Sharing;
+			sourceTree = "<group>";
+		};
 		BF7E5EE51A4A13E700106AAB = {
 			isa = PBXGroup;
 			children = (
@@ -81,6 +91,7 @@
 			children = (
 				BF7E5EF41A4A13E800106AAB /* RSTWebViewController.h */,
 				BF7E5F0B1A4A148E00106AAB /* RSTWebViewController.swift */,
+				BF34039A1A4D5C5D00FCABE3 /* Sharing */,
 				BF92C4371A4A887E00C50472 /* Categories */,
 				BF7E5EF21A4A13E800106AAB /* Supporting Files */,
 			);
@@ -233,6 +244,7 @@
 			files = (
 				BF92C43F1A4A8A2900C50472 /* UIApplication+NetworkActivityIndicator.m in Sources */,
 				BF8D33C41A4B50F9004CE026 /* RSTWebViewController.swift in Sources */,
+				BF3403991A4D569300FCABE3 /* RSTURLActivityItem.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

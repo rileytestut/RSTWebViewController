@@ -310,8 +310,11 @@ internal extension RSTWebViewController {
     {
         let reloadButtonTintColor = self.reloadButton.tintColor
         let stopLoadingButtonTintColor = self.stopLoadingButton.tintColor
+                
+        let activityItem = RSTURLActivityItem(URL: self.webView.URL ?? NSURL())
+        activityItem.title = self.webView.title
         
-        let activityViewController = UIActivityViewController(activityItems: [self.webView.URL ?? ""], applicationActivities: nil)
+        let activityViewController = UIActivityViewController(activityItems: [activityItem], applicationActivities: nil)
         activityViewController.completionWithItemsHandler = { activityType, success, items, error in
             
             // Because tint colors aren't properly updated when views aren't in a view hierarchy, we manually fix any erroneous tint colors
