@@ -314,7 +314,10 @@ internal extension RSTWebViewController {
         let activityItem = RSTURLActivityItem(URL: self.webView.URL ?? NSURL())
         activityItem.title = self.webView.title
         
-        let activityViewController = UIActivityViewController(activityItems: [activityItem], applicationActivities: nil)
+        let safariActivity = RSTSafariActivity()
+        let chromeActivity = RSTChromeActivity()
+        
+        let activityViewController = UIActivityViewController(activityItems: [activityItem], applicationActivities: [safariActivity, chromeActivity])
         activityViewController.completionWithItemsHandler = { activityType, success, items, error in
             
             // Because tint colors aren't properly updated when views aren't in a view hierarchy, we manually fix any erroneous tint colors
@@ -376,14 +379,18 @@ private extension RSTWebViewController {
     {
         self.updateToolbarItems()
         
-        if loading
+        if let application = UIApplication.rst_sharedApplication()
         {
-            UIApplication.startAnimatingNetworkActivityIndicator()
+            if loading
+            {
+                application.networkActivityIndicatorVisible = true
+            }
+            else
+            {
+                application.networkActivityIndicatorVisible = false
+            }
         }
-        else
-        {
-            UIApplication.stopAnimatingNetworkActivityIndicator()
-        }
+        
     }
     
     func updateProgress(progress: Float)

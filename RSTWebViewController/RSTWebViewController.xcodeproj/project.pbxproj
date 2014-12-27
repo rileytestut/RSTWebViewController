@@ -13,8 +13,10 @@
 		BF7E5F021A4A13E800106AAB /* RSTWebViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF7E5F011A4A13E800106AAB /* RSTWebViewControllerTests.swift */; };
 		BF8D33C31A4B50E2004CE026 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BF8D33BA1A4B4E14004CE026 /* Images.xcassets */; };
 		BF8D33C41A4B50F9004CE026 /* RSTWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF7E5F0B1A4A148E00106AAB /* RSTWebViewController.swift */; };
-		BF92C43E1A4A8A2900C50472 /* UIApplication+NetworkActivityIndicator.h in Headers */ = {isa = PBXBuildFile; fileRef = BF92C43C1A4A8A2900C50472 /* UIApplication+NetworkActivityIndicator.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		BF92C43F1A4A8A2900C50472 /* UIApplication+NetworkActivityIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = BF92C43D1A4A8A2900C50472 /* UIApplication+NetworkActivityIndicator.m */; };
+		BFD57BF11A4DF29600EB3F32 /* RSTChromeActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD57BF01A4DF29600EB3F32 /* RSTChromeActivity.swift */; };
+		BFD57BF41A4E10A900EB3F32 /* UIApplication+ExtensionSafe.h in Headers */ = {isa = PBXBuildFile; fileRef = BFD57BF21A4E10A900EB3F32 /* UIApplication+ExtensionSafe.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		BFD57BF51A4E10A900EB3F32 /* UIApplication+ExtensionSafe.m in Sources */ = {isa = PBXBuildFile; fileRef = BFD57BF31A4E10A900EB3F32 /* UIApplication+ExtensionSafe.m */; };
+		BFD57BF71A4F369900EB3F32 /* RSTSafariActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD57BF61A4F369900EB3F32 /* RSTSafariActivity.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,8 +39,10 @@
 		BF7E5F011A4A13E800106AAB /* RSTWebViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RSTWebViewControllerTests.swift; sourceTree = "<group>"; };
 		BF7E5F0B1A4A148E00106AAB /* RSTWebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RSTWebViewController.swift; sourceTree = "<group>"; };
 		BF8D33BA1A4B4E14004CE026 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		BF92C43C1A4A8A2900C50472 /* UIApplication+NetworkActivityIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIApplication+NetworkActivityIndicator.h"; sourceTree = "<group>"; };
-		BF92C43D1A4A8A2900C50472 /* UIApplication+NetworkActivityIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIApplication+NetworkActivityIndicator.m"; sourceTree = "<group>"; };
+		BFD57BF01A4DF29600EB3F32 /* RSTChromeActivity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RSTChromeActivity.swift; sourceTree = "<group>"; };
+		BFD57BF21A4E10A900EB3F32 /* UIApplication+ExtensionSafe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIApplication+ExtensionSafe.h"; sourceTree = "<group>"; };
+		BFD57BF31A4E10A900EB3F32 /* UIApplication+ExtensionSafe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIApplication+ExtensionSafe.m"; sourceTree = "<group>"; };
+		BFD57BF61A4F369900EB3F32 /* RSTSafariActivity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RSTSafariActivity.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +68,8 @@
 			isa = PBXGroup;
 			children = (
 				BF3403981A4D569300FCABE3 /* RSTURLActivityItem.swift */,
+				BFD57BF61A4F369900EB3F32 /* RSTSafariActivity.swift */,
+				BFD57BF01A4DF29600EB3F32 /* RSTChromeActivity.swift */,
 			);
 			name = Sharing;
 			sourceTree = "<group>";
@@ -127,8 +133,8 @@
 		BF92C4371A4A887E00C50472 /* Categories */ = {
 			isa = PBXGroup;
 			children = (
-				BF92C43C1A4A8A2900C50472 /* UIApplication+NetworkActivityIndicator.h */,
-				BF92C43D1A4A8A2900C50472 /* UIApplication+NetworkActivityIndicator.m */,
+				BFD57BF21A4E10A900EB3F32 /* UIApplication+ExtensionSafe.h */,
+				BFD57BF31A4E10A900EB3F32 /* UIApplication+ExtensionSafe.m */,
 			);
 			name = Categories;
 			sourceTree = "<group>";
@@ -141,7 +147,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BF7E5EF51A4A13E800106AAB /* RSTWebViewController.h in Headers */,
-				BF92C43E1A4A8A2900C50472 /* UIApplication+NetworkActivityIndicator.h in Headers */,
+				BFD57BF41A4E10A900EB3F32 /* UIApplication+ExtensionSafe.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -242,9 +248,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BF92C43F1A4A8A2900C50472 /* UIApplication+NetworkActivityIndicator.m in Sources */,
 				BF8D33C41A4B50F9004CE026 /* RSTWebViewController.swift in Sources */,
+				BFD57BF11A4DF29600EB3F32 /* RSTChromeActivity.swift in Sources */,
 				BF3403991A4D569300FCABE3 /* RSTURLActivityItem.swift in Sources */,
+				BFD57BF71A4F369900EB3F32 /* RSTSafariActivity.swift in Sources */,
+				BFD57BF51A4E10A900EB3F32 /* UIApplication+ExtensionSafe.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
