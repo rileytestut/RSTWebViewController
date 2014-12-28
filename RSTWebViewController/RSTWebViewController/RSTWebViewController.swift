@@ -24,10 +24,53 @@ public extension RSTWebViewController {
             self.refreshButton = self.reloadButton
         }
         
+        if self.showsDoneButton && self.doneButton == nil
+        {
+            self.doneButton = UIBarButtonItem(barButtonSystemItem: .Done, target: self, action: "dismissWebViewController:")
+        }
+        else if !self.showsDoneButton && self.doneButton != nil
+        {
+            self.doneButton = nil
+        }
+        
         self.backButton.enabled = self.webView.canGoBack
         self.forwardButton.enabled = self.webView.canGoForward
         
-        self.toolbarItems = [self.backButton, self.flexibleSpaceItem, self.forwardButton, self.flexibleSpaceItem, self.refreshButton, self.flexibleSpaceItem, self.shareButton]
+        if self.traitCollection.horizontalSizeClass == .Compact
+        {
+            // We have to set rightBarButtonItems instead of simply rightBarButtonItem to properly clear previous buttons
+            self.navigationItem.rightBarButtonItems = self.showsDoneButton ? [self.doneButton!] : nil
+            
+            let flexibleSpaceItem = UIBarButtonItem(barButtonSystemItem: .FlexibleSpace, target: nil, action: nil)
+            self.toolbarItems = [self.backButton, flexibleSpaceItem, self.forwardButton, flexibleSpaceItem, self.refreshButton, flexibleSpaceItem, self.shareButton]
+        }
+        else
+        {
+            self.toolbarItems = nil
+            
+            let fixedSpaceItem = UIBarButtonItem(barButtonSystemItem: .FixedSpace, target: nil, action: nil)
+            fixedSpaceItem.width = 20.0
+            
+            let reloadButtonFixedSpaceItem = UIBarButtonItem(barButtonSystemItem: .FixedSpace, target: nil, action: nil)
+            reloadButtonFixedSpaceItem.width = fixedSpaceItem.width
+            
+            if self.refreshButton == self.stopLoadingButton
+            {
+                reloadButtonFixedSpaceItem.width = fixedSpaceItem.width + 1
+            }
+            
+            var items = [self.shareButton, fixedSpaceItem, self.refreshButton, reloadButtonFixedSpaceItem, self.forwardButton, fixedSpaceItem, self.backButton, fixedSpaceItem]
+            
+            if self.showsDoneButton
+            {
+                items.insert(fixedSpaceItem, atIndex: 0)
+                
+                let doneButton = UIBarButtonItem(barButtonSystemItem: .Done, target: self, action: "dismissWebViewController:")
+                items.insert(doneButton, atIndex: 0)
+            }
+            
+            self.navigationItem.rightBarButtonItems = items
+        }
     }
     
 }
@@ -43,10 +86,14 @@ public class RSTWebViewController: UIViewController {
     public let backButton: UIBarButtonItem = UIBarButtonItem(image: nil, style: .Plain, target: nil, action: "goBack:")
     public let forwardButton: UIBarButtonItem = UIBarButtonItem(image: nil, style: .Plain, target: nil, action: "goForward:")
     public let shareButton: UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Action, target: nil, action: "shareLink:")
-    public let flexibleSpaceItem: UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: .FlexibleSpace, target: nil, action: nil)
+    public private(set) var doneButton: UIBarButtonItem?
     
-    // Set to true when presenting modally to show a Done button that'll dismiss itself. Must be set before presentation.
-    public var showsDoneButton: Bool = false
+    // Set to true when presenting modally to show a Done button that'll dismiss itself.
+    public var showsDoneButton: Bool = false {
+        didSet {
+            self.updateToolbarItems()
+        }
+    }
     
     // Array of activity types that should not be displayed in the UIActivityViewController share sheet
     public var excludedActivityTypes: [String]?
@@ -160,12 +207,6 @@ public class RSTWebViewController: UIViewController {
     {
         super.viewDidLoad()
         
-        if self.showsDoneButton
-        {
-            let doneButton = UIBarButtonItem(barButtonSystemItem: .Done, target: self, action: "dismissWebViewController:")
-            self.navigationItem.setRightBarButtonItem(doneButton, animated: false)
-        }
-        
         self.updateToolbarItems()
     }
     
@@ -188,7 +229,16 @@ public class RSTWebViewController: UIViewController {
             }
         }
         
-        self.navigationController?.setToolbarHidden(false, animated: false)
+        if self.traitCollection.horizontalSizeClass == .Compact
+        {
+            self.navigationController?.setToolbarHidden(false, animated: false)
+        }
+        else
+        {
+            self.navigationController?.setToolbarHidden(true, animated: false)
+        }
+        
+        self.updateToolbarItems()
     }
     
     public override func viewWillDisappear(animated: Bool)
@@ -234,6 +284,33 @@ public class RSTWebViewController: UIViewController {
     public override func didReceiveMemoryWarning()
     {
         super.didReceiveMemoryWarning()
+    }
+    
+    //MARK: Layout
+    
+    public override func willTransitionToTraitCollection(newCollection: UITraitCollection, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator)
+    {
+        super.willTransitionToTraitCollection(newCollection, withTransitionCoordinator: coordinator)
+        
+        coordinator.animateAlongsideTransition({ (context) in
+            
+            if self.traitCollection.horizontalSizeClass == .Compact
+            {
+                self.navigationController?.setToolbarHidden(false, animated: true)
+            }
+            else
+            {
+                self.navigationController?.setToolbarHidden(true, animated: true)
+            }
+            
+            }, completion: nil)
+    }
+    
+    public override func traitCollectionDidChange(previousTraitCollection: UITraitCollection?)
+    {
+        super.traitCollectionDidChange(previousTraitCollection)
+        
+        self.updateToolbarItems()
     }
     
     //MARK: KVO
@@ -328,17 +405,17 @@ internal extension RSTWebViewController {
                 RSTOnePasswordExtension.sharedExtension().createExtensionItemForWebView(self.webView, completion: { (extensionItem, error) in
                     activityItem.setItem(extensionItem, forActivityType: "com.agilebits.onepassword-ios.extension")
                     activityItem.setItem(extensionItem, forActivityType: "com.agilebits.beta.onepassword-ios.extension")
-                    self.presentActivityViewControllerWithItems([activityItem])
+                    self.presentActivityViewControllerWithItems([activityItem], fromBarButtonItem: button)
                 })
                 
                 return
             }
         }
         
-        self.presentActivityViewControllerWithItems([activityItem])
+        self.presentActivityViewControllerWithItems([activityItem], fromBarButtonItem: button)
     }
     
-    func presentActivityViewControllerWithItems(activityItems: [AnyObject])
+    func presentActivityViewControllerWithItems(activityItems: [AnyObject], fromBarButtonItem barButtonItem: UIBarButtonItem)
     {
         var applicationActivities = self.applicationActivities ?? [UIActivity]()
         
@@ -365,6 +442,10 @@ internal extension RSTWebViewController {
         
         let activityViewController = UIActivityViewController(activityItems: activityItems, applicationActivities: applicationActivities)
         activityViewController.excludedActivityTypes = self.excludedActivityTypes
+        
+        activityViewController.modalPresentationStyle = .Popover
+        activityViewController.popoverPresentationController?.barButtonItem = barButtonItem
+        
         activityViewController.completionWithItemsHandler = { activityType, success, items, error in
             
             if RSTOnePasswordExtension.sharedExtension().isOnePasswordExtensionActivityType(activityType)
@@ -392,6 +473,7 @@ internal extension RSTWebViewController {
             self.stopLoadingButton.tintColor = stopLoadingButtonTintColor
             
         }
+        
         self.presentViewController(activityViewController, animated: true, completion: nil)
     }
 }
