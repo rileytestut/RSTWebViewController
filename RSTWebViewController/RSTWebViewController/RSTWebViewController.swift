@@ -396,6 +396,28 @@ internal extension RSTWebViewController {
         
         if self.excludedActivityTypes == nil || (self.excludedActivityTypes != nil && !contains(self.excludedActivityTypes!, RSTActivityTypeOnePassword))
         {
+
+            #if DEBUG
+            
+            var importedOnePasswordUTI = false
+            
+            if let importedUTIs = NSBundle.mainBundle().objectForInfoDictionaryKey("UTImportedTypeDeclarations") as [[String: AnyObject]]?
+            {
+                for importedUTI in importedUTIs
+                {
+                    if importedUTI["UTTypeIdentifier"] as String == "org.appextension.fill-webview-action"
+                    {
+                        importedOnePasswordUTI = true
+                        break
+                    }
+                }
+            }
+            
+            assert(importedOnePasswordUTI, "The 1Password Extension UTI has not been declared as one of your app's Imported UTIs. Please see the RSTWebViewController README for details on how to add it.")
+                
+            #endif
+            
+            
             let onePasswordURLScheme = NSURL(string: "org-appextension-feature-password-management://")
             
             if onePasswordURLScheme != nil && UIApplication.rst_sharedApplication().canOpenURL(onePasswordURLScheme!)
