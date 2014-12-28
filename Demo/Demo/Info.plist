@@ -36,5 +36,18 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>UTImportedTypeDeclarations</key>
+	<array>
+		<dict>
+			<key>UTTypeConformsTo</key>
+			<array>
+				<string>public.url</string>
+			</array>
+			<key>UTTypeDescription</key>
+			<string>1Password Fill WebView Extension</string>
+			<key>UTTypeIdentifier</key>
+			<string>org.appextension.fill-webview-action</string>
+		</dict>
+	</array>
 </dict>
 </plist>

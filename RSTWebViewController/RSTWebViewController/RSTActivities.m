@@ -7,6 +7,8 @@
 //
 
 #import "RSTActivities.h"
+#import "RSTOnePasswordExtension.h"
 
 NSString *const RSTActivityTypeSafari = @"com.rileytestut.RSTWebViewController.activity.Safari";
 NSString *const RSTActivityTypeChrome = @"com.rileytestut.RSTWebViewController.activity.Chrome";
+NSString *const RSTActivityTypeOnePassword = @"com.rileytestut.RSTWebViewController.activity.OnePassword";

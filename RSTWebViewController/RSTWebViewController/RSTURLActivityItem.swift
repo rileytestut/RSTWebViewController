@@ -9,10 +9,45 @@
 import Foundation
 import MobileCoreServices
 
+internal extension RSTURLActivityItem
+{
+    // Set an item to be provided for the given activityType
+    func setItem(item: AnyObject?, forActivityType activityType: String)
+    {
+        if let item: AnyObject = item
+        {
+            if self.itemDictionary == nil
+            {
+                self.itemDictionary = [String: NSExtensionItem]()
+            }
+            
+            self.itemDictionary![activityType] = item
+        }
+        else
+        {
+            self.itemDictionary?[activityType] = nil
+            
+            if self.itemDictionary?.count == 0
+            {
+                self.itemDictionary = nil
+            }
+        }
+    }
+    
+    // Returns item that will be provided for the given activityType
+    func itemForActivityType(activityType: String) -> AnyObject?
+    {
+        return self.itemDictionary?[activityType]
+    }
+}
+
 internal class RSTURLActivityItem: NSObject, UIActivityItemSource
 {
     internal var title: String?
     internal var URL: NSURL
+    internal var typeIdentifier = kUTTypeURL
+    
+    private var itemDictionary: [String: AnyObject]?
     
     init(URL: NSURL)
     {
@@ -28,6 +63,11 @@ internal class RSTURLActivityItem: NSObject, UIActivityItemSource
     
     func activityViewController(activityViewController: UIActivityViewController, itemForActivityType activityType: String) -> AnyObject?
     {
+        if let item: AnyObject = self.itemDictionary?[activityType]
+        {
+            return item
+        }
+        
         let extensionActivityTypes: [String] = [UIActivityTypePostToTwitter, UIActivityTypePostToFacebook, UIActivityTypePostToWeibo, UIActivityTypePostToFlickr, UIActivityTypePostToVimeo, UIActivityTypePostToTencentWeibo]
         let applicationActivityTypes: [String] = [RSTActivityTypeSafari, RSTActivityTypeChrome]
         
@@ -56,6 +96,6 @@ internal class RSTURLActivityItem: NSObject, UIActivityItemSource
     
     func activityViewController(activityViewController: UIActivityViewController, dataTypeIdentifierForActivityType activityType: String?) -> String
     {
-        return kUTTypeURL
+        return self.typeIdentifier
     }
 }

@@ -10,3 +10,4 @@
 
 FOUNDATION_EXPORT NSString *const RSTActivityTypeSafari;
 FOUNDATION_EXPORT NSString *const RSTActivityTypeChrome;
+FOUNDATION_EXPORT NSString *const RSTActivityTypeOnePassword;

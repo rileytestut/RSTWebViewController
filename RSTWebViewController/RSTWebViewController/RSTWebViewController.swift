@@ -314,12 +314,32 @@ internal extension RSTWebViewController {
     
     func shareLink(button: UIBarButtonItem)
     {
-        let reloadButtonTintColor = self.reloadButton.tintColor
-        let stopLoadingButtonTintColor = self.stopLoadingButton.tintColor
-                
         let activityItem = RSTURLActivityItem(URL: self.webView.URL ?? NSURL())
         activityItem.title = self.webView.title
         
+        if self.excludedActivityTypes == nil || (self.excludedActivityTypes != nil && !contains(self.excludedActivityTypes!, RSTActivityTypeOnePassword))
+        {
+            let onePasswordURLScheme = NSURL(string: "org-appextension-feature-password-management://")
+            
+            if onePasswordURLScheme != nil && UIApplication.rst_sharedApplication().canOpenURL(onePasswordURLScheme!)
+            {
+                activityItem.typeIdentifier = "org.appextension.fill-webview-action"
+                
+                RSTOnePasswordExtension.sharedExtension().createExtensionItemForWebView(self.webView, completion: { (extensionItem, error) in
+                    activityItem.setItem(extensionItem, forActivityType: "com.agilebits.onepassword-ios.extension")
+                    activityItem.setItem(extensionItem, forActivityType: "com.agilebits.beta.onepassword-ios.extension")
+                    self.presentActivityViewControllerWithItems([activityItem])
+                })
+                
+                return
+            }
+        }
+        
+        self.presentActivityViewControllerWithItems([activityItem])
+    }
+    
+    func presentActivityViewControllerWithItems(activityItems: [AnyObject])
+    {
         var applicationActivities = self.applicationActivities ?? [UIActivity]()
         
         if let excludedActivityTypes = self.excludedActivityTypes
@@ -340,9 +360,17 @@ internal extension RSTWebViewController {
             applicationActivities.append(RSTChromeActivity())
         }
         
-        let activityViewController = UIActivityViewController(activityItems: [activityItem], applicationActivities: applicationActivities)
+        let reloadButtonTintColor = self.reloadButton.tintColor
+        let stopLoadingButtonTintColor = self.stopLoadingButton.tintColor
+        
+        let activityViewController = UIActivityViewController(activityItems: activityItems, applicationActivities: applicationActivities)
         activityViewController.excludedActivityTypes = self.excludedActivityTypes
         activityViewController.completionWithItemsHandler = { activityType, success, items, error in
+            
+            if RSTOnePasswordExtension.sharedExtension().isOnePasswordExtensionActivityType(activityType)
+            {
+                RSTOnePasswordExtension.sharedExtension().fillReturnedItems(items, intoWebView: self.webView, completion: nil)
+            }
             
             // Because tint colors aren't properly updated when views aren't in a view hierarchy, we manually fix any erroneous tint colors
             self.progressView.tintColorDidChange()

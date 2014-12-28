@@ -15,6 +15,8 @@
 		BF8D33C41A4B50F9004CE026 /* RSTWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF7E5F0B1A4A148E00106AAB /* RSTWebViewController.swift */; };
 		BFC3AA371A4F81730040AE42 /* RSTActivities.h in Headers */ = {isa = PBXBuildFile; fileRef = BFC3AA361A4F81730040AE42 /* RSTActivities.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		BFC3AA381A4F81EF0040AE42 /* RSTActivities.m in Sources */ = {isa = PBXBuildFile; fileRef = BFC3AA321A4F81310040AE42 /* RSTActivities.m */; };
+		BFCC03C91A4F98B400DE7D64 /* RSTOnePasswordExtension.h in Headers */ = {isa = PBXBuildFile; fileRef = BFCC03C61A4F98B400DE7D64 /* RSTOnePasswordExtension.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		BFCC03CA1A4F98B400DE7D64 /* RSTOnePasswordExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = BFCC03C71A4F98B400DE7D64 /* RSTOnePasswordExtension.m */; };
 		BFD57BF11A4DF29600EB3F32 /* RSTChromeActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD57BF01A4DF29600EB3F32 /* RSTChromeActivity.swift */; };
 		BFD57BF41A4E10A900EB3F32 /* UIApplication+ExtensionSafe.h in Headers */ = {isa = PBXBuildFile; fileRef = BFD57BF21A4E10A900EB3F32 /* UIApplication+ExtensionSafe.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		BFD57BF51A4E10A900EB3F32 /* UIApplication+ExtensionSafe.m in Sources */ = {isa = PBXBuildFile; fileRef = BFD57BF31A4E10A900EB3F32 /* UIApplication+ExtensionSafe.m */; };
@@ -43,6 +45,8 @@
 		BF8D33BA1A4B4E14004CE026 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		BFC3AA321A4F81310040AE42 /* RSTActivities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RSTActivities.m; sourceTree = "<group>"; };
 		BFC3AA361A4F81730040AE42 /* RSTActivities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RSTActivities.h; sourceTree = "<group>"; };
+		BFCC03C61A4F98B400DE7D64 /* RSTOnePasswordExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RSTOnePasswordExtension.h; sourceTree = "<group>"; };
+		BFCC03C71A4F98B400DE7D64 /* RSTOnePasswordExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RSTOnePasswordExtension.m; sourceTree = "<group>"; };
 		BFD57BF01A4DF29600EB3F32 /* RSTChromeActivity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RSTChromeActivity.swift; sourceTree = "<group>"; };
 		BFD57BF21A4E10A900EB3F32 /* UIApplication+ExtensionSafe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIApplication+ExtensionSafe.h"; sourceTree = "<group>"; };
 		BFD57BF31A4E10A900EB3F32 /* UIApplication+ExtensionSafe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIApplication+ExtensionSafe.m"; sourceTree = "<group>"; };
@@ -104,6 +108,7 @@
 				BF7E5EF41A4A13E800106AAB /* RSTWebViewController.h */,
 				BF7E5F0B1A4A148E00106AAB /* RSTWebViewController.swift */,
 				BF34039A1A4D5C5D00FCABE3 /* Sharing */,
+				BFCC03BA1A4F979C00DE7D64 /* 1Password */,
 				BF92C4371A4A887E00C50472 /* Categories */,
 				BF7E5EF21A4A13E800106AAB /* Supporting Files */,
 			);
@@ -145,6 +150,15 @@
 			name = Categories;
 			sourceTree = "<group>";
 		};
+		BFCC03BA1A4F979C00DE7D64 /* 1Password */ = {
+			isa = PBXGroup;
+			children = (
+				BFCC03C61A4F98B400DE7D64 /* RSTOnePasswordExtension.h */,
+				BFCC03C71A4F98B400DE7D64 /* RSTOnePasswordExtension.m */,
+			);
+			name = 1Password;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -154,6 +168,7 @@
 			files = (
 				BF7E5EF51A4A13E800106AAB /* RSTWebViewController.h in Headers */,
 				BFD57BF41A4E10A900EB3F32 /* UIApplication+ExtensionSafe.h in Headers */,
+				BFCC03C91A4F98B400DE7D64 /* RSTOnePasswordExtension.h in Headers */,
 				BFC3AA371A4F81730040AE42 /* RSTActivities.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -256,6 +271,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BF8D33C41A4B50F9004CE026 /* RSTWebViewController.swift in Sources */,
+				BFCC03CA1A4F98B400DE7D64 /* RSTOnePasswordExtension.m in Sources */,
 				BFD57BF11A4DF29600EB3F32 /* RSTChromeActivity.swift in Sources */,
 				BFC3AA381A4F81EF0040AE42 /* RSTActivities.m in Sources */,
 				BF3403991A4D569300FCABE3 /* RSTURLActivityItem.swift in Sources */,
