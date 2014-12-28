@@ -8,8 +8,6 @@
 
 import UIKit
 
-let RSTActivityTypeSafari = "com.rileytestut.RSTWebViewController.activity.Safari"
-
 internal class RSTSafariActivity: UIActivity {
 
     private var URL: NSURL?

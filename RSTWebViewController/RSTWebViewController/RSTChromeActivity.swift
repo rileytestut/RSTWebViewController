@@ -8,8 +8,6 @@
 
 import UIKit
 
-let RSTActivityTypeChrome = "com.rileytestut.RSTWebViewController.activity.Chrome"
-
 internal class RSTChromeActivity: UIActivity {
     
     private var URL: NSURL?

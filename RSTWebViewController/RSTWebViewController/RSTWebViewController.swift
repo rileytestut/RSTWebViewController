@@ -48,6 +48,12 @@ public class RSTWebViewController: UIViewController {
     // Set to true when presenting modally to show a Done button that'll dismiss itself. Must be set before presentation.
     public var showsDoneButton: Bool = false
     
+    // Array of activity types that should not be displayed in the UIActivityViewController share sheet
+    public var excludedActivityTypes: [String]?
+    
+    // Array of application-specific UIActivities to handle sharing links via UIActivityViewController
+    public var applicationActivities: [UIActivity]?
+    
     
     //MARK: Private Properties
     
@@ -314,10 +320,28 @@ internal extension RSTWebViewController {
         let activityItem = RSTURLActivityItem(URL: self.webView.URL ?? NSURL())
         activityItem.title = self.webView.title
         
-        let safariActivity = RSTSafariActivity()
-        let chromeActivity = RSTChromeActivity()
+        var applicationActivities = self.applicationActivities ?? [UIActivity]()
         
-        let activityViewController = UIActivityViewController(activityItems: [activityItem], applicationActivities: [safariActivity, chromeActivity])
+        if let excludedActivityTypes = self.excludedActivityTypes
+        {
+            if !contains(excludedActivityTypes, RSTActivityTypeSafari)
+            {
+                applicationActivities.append(RSTSafariActivity())
+            }
+            
+            if !contains(excludedActivityTypes, RSTActivityTypeChrome)
+            {
+                applicationActivities.append(RSTChromeActivity())
+            }
+        }
+        else
+        {
+            applicationActivities.append(RSTSafariActivity())
+            applicationActivities.append(RSTChromeActivity())
+        }
+        
+        let activityViewController = UIActivityViewController(activityItems: [activityItem], applicationActivities: applicationActivities)
+        activityViewController.excludedActivityTypes = self.excludedActivityTypes
         activityViewController.completionWithItemsHandler = { activityType, success, items, error in
             
             // Because tint colors aren't properly updated when views aren't in a view hierarchy, we manually fix any erroneous tint colors
