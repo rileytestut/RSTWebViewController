@@ -64,9 +64,7 @@ public extension RSTWebViewController {
             if self.showsDoneButton
             {
                 items.insert(fixedSpaceItem, atIndex: 0)
-                
-                let doneButton = UIBarButtonItem(barButtonSystemItem: .Done, target: self, action: "dismissWebViewController:")
-                items.insert(doneButton, atIndex: 0)
+                items.insert(self.doneButton!, atIndex: 0)
             }
             
             self.navigationItem.rightBarButtonItems = items
@@ -82,11 +80,15 @@ public class RSTWebViewController: UIViewController {
     // WKWebView used to display webpages
     public private(set) var webView: WKWebView
     
-    public private(set) var refreshButton: UIBarButtonItem
-    public let backButton: UIBarButtonItem = UIBarButtonItem(image: nil, style: .Plain, target: nil, action: "goBack:")
-    public let forwardButton: UIBarButtonItem = UIBarButtonItem(image: nil, style: .Plain, target: nil, action: "goForward:")
-    public let shareButton: UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Action, target: nil, action: "shareLink:")
-    public private(set) var doneButton: UIBarButtonItem?
+    // UIBarButton items. Customizable, and subclasses can override updateToolbarItems() to arrange them however they want
+    public var backButton: UIBarButtonItem = UIBarButtonItem(image: nil, style: .Plain, target: nil, action: "goBack:")
+    public var forwardButton: UIBarButtonItem = UIBarButtonItem(image: nil, style: .Plain, target: nil, action: "goForward:")
+    public var shareButton: UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Action, target: nil, action: "shareLink:")
+    
+    public var reloadButton: UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Refresh, target: nil, action: "refresh:")
+    public var stopLoadingButton: UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Stop, target: nil, action: "refresh:")
+    
+    public var doneButton: UIBarButtonItem?
     
     // Set to true when presenting modally to show a Done button that'll dismiss itself.
     public var showsDoneButton: Bool = false {
@@ -107,9 +109,7 @@ public class RSTWebViewController: UIViewController {
     private let initialReqest: NSURLRequest?
     private let progressView = UIProgressView()
     private var ignoreUpdateProgress: Bool = false
-    
-    private let reloadButton: UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Refresh, target: nil, action: "refresh:")
-    private let stopLoadingButton: UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Stop, target: nil, action: "refresh:")
+    private var refreshButton: UIBarButtonItem
     
     
     //MARK: Initializers
