@@ -167,7 +167,7 @@ public class RSTWebViewController: UIViewController {
     private func initialize()
     {
         self.progressView.progressViewStyle = .Bar
-        self.progressView.autoresizingMask = .FlexibleWidth | .FlexibleHeight
+        self.progressView.autoresizingMask = .FlexibleWidth | .FlexibleTopMargin
         self.progressView.progress = 0.5
         self.progressView.alpha = 0.0
         self.progressView.hidden = true
