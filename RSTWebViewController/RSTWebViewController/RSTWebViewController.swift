@@ -36,15 +36,7 @@ public extension RSTWebViewController {
         self.backButton.enabled = self.webView.canGoBack
         self.forwardButton.enabled = self.webView.canGoForward
         
-        if self.traitCollection.horizontalSizeClass == .Compact
-        {
-            // We have to set rightBarButtonItems instead of simply rightBarButtonItem to properly clear previous buttons
-            self.navigationItem.rightBarButtonItems = self.showsDoneButton ? [self.doneButton!] : nil
-            
-            let flexibleSpaceItem = UIBarButtonItem(barButtonSystemItem: .FlexibleSpace, target: nil, action: nil)
-            self.toolbarItems = [self.backButton, flexibleSpaceItem, self.forwardButton, flexibleSpaceItem, self.refreshButton, flexibleSpaceItem, self.shareButton]
-        }
-        else
+        if self.traitCollection.horizontalSizeClass == .Regular
         {
             self.toolbarItems = nil
             
@@ -68,6 +60,14 @@ public extension RSTWebViewController {
             }
             
             self.navigationItem.rightBarButtonItems = items
+        }
+        else
+        {
+            // We have to set rightBarButtonItems instead of simply rightBarButtonItem to properly clear previous buttons
+            self.navigationItem.rightBarButtonItems = self.showsDoneButton ? [self.doneButton!] : nil
+            
+            let flexibleSpaceItem = UIBarButtonItem(barButtonSystemItem: .FlexibleSpace, target: nil, action: nil)
+            self.toolbarItems = [self.backButton, flexibleSpaceItem, self.forwardButton, flexibleSpaceItem, self.refreshButton, flexibleSpaceItem, self.shareButton]
         }
     }
     
@@ -229,13 +229,13 @@ public class RSTWebViewController: UIViewController {
             }
         }
         
-        if self.traitCollection.horizontalSizeClass == .Compact
+        if self.traitCollection.horizontalSizeClass == .Regular
         {
-            self.navigationController?.setToolbarHidden(false, animated: false)
+            self.navigationController?.setToolbarHidden(true, animated: false)
         }
         else
         {
-            self.navigationController?.setToolbarHidden(true, animated: false)
+            self.navigationController?.setToolbarHidden(false, animated: false)
         }
         
         self.updateToolbarItems()
@@ -294,13 +294,13 @@ public class RSTWebViewController: UIViewController {
         
         coordinator.animateAlongsideTransition({ (context) in
             
-            if self.traitCollection.horizontalSizeClass == .Compact
+            if self.traitCollection.horizontalSizeClass == .Regular
             {
-                self.navigationController?.setToolbarHidden(false, animated: true)
+                self.navigationController?.setToolbarHidden(true, animated: true)
             }
             else
             {
-                self.navigationController?.setToolbarHidden(true, animated: true)
+                self.navigationController?.setToolbarHidden(false, animated: true)
             }
             
             }, completion: nil)
