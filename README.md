@@ -113,7 +113,7 @@ Unlike other implementations of this 1Password extension, RSTWebViewController i
 1. Click your app project's blue icon in the Files pane, then select your app target from the "Targets" section.
 2. Click the "Info" tab at the top.
 3. Expand the "Imported UTIs" section.
-4. Click the "+", and fill the sections out exactly like this screenshot: ![1Password UTI](https://cloud.githubusercontent.com/assets/705880/5563559/35a2a3c0-8e45-11e4-921e-cdfe4d732b2f.png)
+4. Click the "+" twice, and fill the sections out exactly like this screenshot: ![1Password UTI](https://cloud.githubusercontent.com/assets/705880/5585026/3c88e890-9064-11e4-8911-bd1cf25f1e67.png)
 
 Once you've done this, the 1Password extension will automatically show up in the share sheet if 1Password is installed, and the rest will be handled for you automatically by RSTWebViewController.
 
