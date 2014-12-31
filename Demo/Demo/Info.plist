@@ -40,13 +40,22 @@
 	<array>
 		<dict>
 			<key>UTTypeConformsTo</key>
-			<array>
-				<string>public.url</string>
-			</array>
+			<array/>
 			<key>UTTypeDescription</key>
-			<string>1Password Fill WebView Extension</string>
+			<string>1Password Fill Web View Action</string>
 			<key>UTTypeIdentifier</key>
 			<string>org.appextension.fill-webview-action</string>
+		</dict>
+		<dict>
+			<key>UTTypeConformsTo</key>
+			<array>
+				<string>public.url</string>
+				<string>org.appextension.fill-webview-action</string>
+			</array>
+			<key>UTTypeDescription</key>
+			<string>RSTWebViewController URL</string>
+			<key>UTTypeIdentifier</key>
+			<string>com.rileytestut.RSTWebViewController.url</string>
 		</dict>
 	</array>
 </dict>

@@ -400,25 +400,42 @@ internal extension RSTWebViewController {
             #if DEBUG
                 
                 // If UIApplication.rst_sharedApplication() is nil, we are running in an application extension, meaning NSBundle.mainBundle() will return the extension bundle, not the container app's
-                // Because of this, we can't check to see if the Imported UTI has been added, but since the assert is purely for debugging, it's not that big of an issue
+                // Because of this, we can't check to see if the Imported UTIs have been added, but since the assert is purely for debugging, it's not that big of an issue
                 
                 if UIApplication.rst_sharedApplication() != nil
                 {
                     var importedOnePasswordUTI = false
-                                        
+                    var importedURLUTI = false
+                    
                     if let importedUTIs = NSBundle.mainBundle().objectForInfoDictionaryKey("UTImportedTypeDeclarations") as [[String: AnyObject]]?
                     {
                         for importedUTI in importedUTIs
                         {
-                            if importedUTI["UTTypeIdentifier"] as String == "org.appextension.fill-webview-action"
+                            let identifier = importedUTI["UTTypeIdentifier"] as String
+                            
+                            if identifier == "org.appextension.fill-webview-action"
                             {
                                 importedOnePasswordUTI = true
+                            }
+                            else if identifier == "com.rileytestut.RSTWebViewController.url"
+                            {
+                                let UTIs = importedUTI["UTTypeConformsTo"] as [String]
+                                
+                                if contains(UTIs, "org.appextension.fill-webview-action") && contains(UTIs, "public.url")
+                                {
+                                    importedURLUTI = true
+                                    break
+                                }
+                            }
+                            
+                            if importedOnePasswordUTI && importedURLUTI
+                            {
                                 break
                             }
                         }
                     }
                     
-                    assert(importedOnePasswordUTI, "The 1Password Extension UTI has not been declared as one of your app's Imported UTIs. Please see the RSTWebViewController README for details on how to add it.")
+                    assert(importedOnePasswordUTI && importedURLUTI, "Either the 1Password Extension UTI, the RSTWebViewController URL UTI, or both, have not been properly declared as Imported UTIs. Please see the RSTWebViewController README for details on how to add them.")
                 }
                 
             #endif
@@ -430,7 +447,7 @@ internal extension RSTWebViewController {
             // Because of this, if UIApplication.rst_sharedApplication() == nil, we'll simply assume it is installed, since there's no harm in doing so
             if UIApplication.rst_sharedApplication() == nil || (onePasswordURLScheme != nil && UIApplication.rst_sharedApplication().canOpenURL(onePasswordURLScheme!))
             {
-                activityItem.typeIdentifier = "org.appextension.fill-webview-action"
+                activityItem.typeIdentifier = "com.rileytestut.RSTWebViewController.url"
                 
                 RSTOnePasswordExtension.sharedExtension().createExtensionItemForWebView(self.webView, completion: { (extensionItem, error) in
                     activityItem.setItem(extensionItem, forActivityType: "com.agilebits.onepassword-ios.extension")
