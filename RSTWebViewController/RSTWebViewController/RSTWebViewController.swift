@@ -159,6 +159,8 @@ public class RSTWebViewController: UIViewController {
         
         self.refreshButton = self.reloadButton
         
+        self.initialReqest = nil
+        
         super.init(coder: coder)
         
         self.initialize()
@@ -319,7 +321,7 @@ public class RSTWebViewController: UIViewController {
     {
         if context == RSTWebViewControllerContext
         {
-            let webView = (object as WKWebView)
+            let webView = (object as! WKWebView)
             
             switch keyPath
             {
@@ -407,11 +409,11 @@ internal extension RSTWebViewController {
                     var importedOnePasswordUTI = false
                     var importedURLUTI = false
                     
-                    if let importedUTIs = NSBundle.mainBundle().objectForInfoDictionaryKey("UTImportedTypeDeclarations") as [[String: AnyObject]]?
+                    if let importedUTIs = NSBundle.mainBundle().objectForInfoDictionaryKey("UTImportedTypeDeclarations") as! [[String: AnyObject]]?
                     {
                         for importedUTI in importedUTIs
                         {
-                            let identifier = importedUTI["UTTypeIdentifier"] as String
+                            let identifier = importedUTI["UTTypeIdentifier"] as! String
                             
                             if identifier == "org.appextension.fill-webview-action"
                             {
@@ -419,7 +421,7 @@ internal extension RSTWebViewController {
                             }
                             else if identifier == "com.rileytestut.RSTWebViewController.url"
                             {
-                                let UTIs = importedUTI["UTTypeConformsTo"] as [String]
+                                let UTIs = importedUTI["UTTypeConformsTo"] as! [String]
                                 
                                 if contains(UTIs, "org.appextension.fill-webview-action") && contains(UTIs, "public.url")
                                 {

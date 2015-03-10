@@ -57,7 +57,7 @@ internal class RSTSafariActivity: UIActivity {
         {
             if activityItem is String
             {
-                self.URL = NSURL(string: activityItem as String)
+                self.URL = NSURL(string: activityItem as! String)
             }
             else if activityItem is NSURL
             {
@@ -89,7 +89,7 @@ internal class RSTSafariActivity: UIActivity {
                 
                 if activityItem is String
                 {
-                    URL = NSURL(string: activityItem as String)
+                    URL = NSURL(string: activityItem as! String)
                 }
                 else if activityItem is NSURL
                 {

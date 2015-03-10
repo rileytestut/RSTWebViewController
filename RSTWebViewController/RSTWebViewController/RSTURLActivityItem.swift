@@ -81,7 +81,7 @@ internal class RSTURLActivityItem: NSObject, UIActivityItemSource
             item.attributedTitle = NSAttributedString(string: self.title!)
             item.attributedContentText = item.attributedTitle
             
-            item.attachments = [NSItemProvider(item: self.URL, typeIdentifier: kUTTypeURL)]
+            item.attachments = [NSItemProvider(item: self.URL, typeIdentifier: kUTTypeURL as String)]
             
             return item
         }
@@ -96,6 +96,6 @@ internal class RSTURLActivityItem: NSObject, UIActivityItemSource
     
     func activityViewController(activityViewController: UIActivityViewController, dataTypeIdentifierForActivityType activityType: String?) -> String
     {
-        return self.typeIdentifier
+        return self.typeIdentifier as String
     }
 }
